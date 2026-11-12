@@ -1,0 +1,6 @@
+drive,field,passed,flags,imu_source,gt_source,duration_s,moving_s,lag_gps_s,corr_gps,lag_imu_s,corr_imu,gyro_bias_rad_s,heading_rms_deg,n_gps_gaps,Q1,Q2,Q3
+01_13B_Jackal,13B,False,"error: no IMU found in /home/symum2026/citrusfarm/01_13B_Jackal (looked for ['microstrain', 'zed'])",,,,,,,,,,,,,,
+02_13B_Jackal,13B,True,,microstrain,processed:gt.bag,442.539577960968,435.3,-0.030000000000017624,0.8124314902457723,-0.10000000000001724,0.9069745362646359,-0.0010975983785423233,1.2556172282784528,0.0,True,True,True
+03_13B_Jackal,13B,False,"error: no IMU found in /home/symum2026/citrusfarm/03_13B_Jackal (looked for ['microstrain', 'zed'])",,,,,,,,,,,,,,
+04_13D_Jackal,13D,True,,microstrain,processed:gt.bag,509.1795144081116,506.24,-0.0500000000000172,0.9076716031983362,-0.10000000000001724,0.9227139904650824,-0.0012668863229042707,1.3113412118845178,0.0,True,True,True
+05_13D_Jackal,13D,True,,microstrain,processed:gt.bag,504.75951862335205,503.24,-0.030000000000017624,0.908246138180166,-0.12000000000001726,0.9156829372149111,-0.0014545520265082522,1.2429692886784216,0.0,True,True,True

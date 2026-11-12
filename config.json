@@ -1,5 +1,5 @@
 {
-  "data_root": "/path/to/citrus-farm-dataset  (raw bags, outside the repo)",
+  "data_root": "/home/symum2026/citrusfarm",
   "drives": {
     "01_13B_Jackal": "13B",
     "02_13B_Jackal": "13B",
@@ -7,7 +7,7 @@
     "04_13D_Jackal": "13D",
     "05_13D_Jackal": "13D"
   },
-  "lever_arm_xy": null,
+  "lever_arm_xy": [-0.18, 0.0],
   "allow_zero_lever_arm": false,
   "imu_preference": [
     "microstrain",

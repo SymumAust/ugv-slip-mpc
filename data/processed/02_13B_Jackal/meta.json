@@ -1,0 +1,15 @@
+{
+  "drive": "02_13B_Jackal",
+  "field": "13B",
+  "imu_source": "microstrain",
+  "gt_source": "gt.bag",
+  "rows": {
+    "odom": 22224,
+    "imu": 88990,
+    "gt": 4447
+  },
+  "load_flags": [
+    "imu[microstrain]: 17.4% non-increasing stamps, rebuilt with uniform-rate fit"
+  ],
+  "note": "Extracted from CitrusFarm (CC BY-SA 4.0, Teng et al. 2023). Timestamps: header stamps, s."
+}
