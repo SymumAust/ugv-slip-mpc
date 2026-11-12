@@ -1,0 +1,11 @@
+# raw dataset files never go into git (many GB; re-downloadable from the public S3 bucket)
+*.bag
+raw/
+citrus-farm-dataset/
+# synthetic self-test outputs and scratch
+synth_*/
+results_quick/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
