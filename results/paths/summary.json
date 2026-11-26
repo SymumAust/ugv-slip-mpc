@@ -1,0 +1,192 @@
+{
+  "per_drive": {
+    "01_13B_Jackal": {
+      "drive": "01_13B_Jackal",
+      "field": "13B",
+      "row_axis_deg": -0.81,
+      "path_length_m": 1515.3,
+      "n_rows": 35,
+      "row_len_median_m": 33.9,
+      "kappa_abs_p99_turns": 0.523,
+      "ref_to_raw_gps_median_m": 0.208,
+      "ref_to_raw_gps_p99_m": 0.63,
+      "lane_gaps_m": [
+        6.87,
+        6.13,
+        6.52,
+        6.1,
+        6.65,
+        6.48,
+        6.07,
+        6.48,
+        6.85,
+        5.75,
+        6.97,
+        6.16,
+        6.49,
+        6.03,
+        6.69,
+        6.5,
+        6.65,
+        6.11,
+        6.53,
+        6.41,
+        5.92,
+        6.71,
+        6.57,
+        6.02,
+        6.72,
+        6.33,
+        6.48,
+        6.19,
+        6.13,
+        6.63,
+        6.4,
+        6.38,
+        6.61,
+        6.37
+      ]
+    },
+    "02_13B_Jackal": {
+      "drive": "02_13B_Jackal",
+      "field": "13B",
+      "row_axis_deg": -0.48,
+      "path_length_m": 515.6,
+      "n_rows": 8,
+      "row_len_median_m": 33.2,
+      "kappa_abs_p99_turns": 0.435,
+      "ref_to_raw_gps_median_m": 0.161,
+      "ref_to_raw_gps_p99_m": 0.411,
+      "lane_gaps_m": [
+        32.08,
+        31.69,
+        32.18,
+        32.15,
+        31.99,
+        31.99,
+        25.51
+      ]
+    },
+    "03_13B_Jackal": {
+      "drive": "03_13B_Jackal",
+      "field": "13B",
+      "row_axis_deg": -0.61,
+      "path_length_m": 1998.3,
+      "n_rows": 36,
+      "row_len_median_m": 41.0,
+      "kappa_abs_p99_turns": 0.449,
+      "ref_to_raw_gps_median_m": 0.184,
+      "ref_to_raw_gps_p99_m": 0.522,
+      "lane_gaps_m": [
+        6.19,
+        6.56,
+        6.38,
+        6.61,
+        5.84,
+        6.13,
+        7.21,
+        6.22,
+        6.03,
+        6.53,
+        6.62,
+        6.32,
+        6.54,
+        6.01,
+        6.71,
+        6.5,
+        6.33,
+        6.57,
+        6.58,
+        6.1,
+        5.93,
+        7.05,
+        6.41,
+        5.96,
+        6.51,
+        6.49,
+        6.17,
+        6.58,
+        6.06,
+        6.63,
+        6.58,
+        6.27,
+        6.31,
+        6.42
+      ]
+    },
+    "04_13D_Jackal": {
+      "drive": "04_13D_Jackal",
+      "field": "13D",
+      "row_axis_deg": -0.06,
+      "path_length_m": 871.7,
+      "n_rows": 12,
+      "row_len_median_m": 51.3,
+      "kappa_abs_p99_turns": 0.469,
+      "ref_to_raw_gps_median_m": 0.164,
+      "ref_to_raw_gps_p99_m": 0.664,
+      "lane_gaps_m": [
+        6.4,
+        6.3,
+        6.23,
+        6.57,
+        6.42,
+        6.33
+      ]
+    },
+    "05_13D_Jackal": {
+      "drive": "05_13D_Jackal",
+      "field": "13D",
+      "row_axis_deg": -0.38,
+      "path_length_m": 831.3,
+      "n_rows": 14,
+      "row_len_median_m": 50.5,
+      "kappa_abs_p99_turns": 0.547,
+      "ref_to_raw_gps_median_m": 0.161,
+      "ref_to_raw_gps_p99_m": 0.432,
+      "lane_gaps_m": [
+        6.42,
+        6.15,
+        6.57,
+        6.42,
+        6.41,
+        6.21
+      ]
+    }
+  },
+  "13B": {
+    "lane_spacing_m": 6.45,
+    "lane_spacing_iqr_m": [
+      6.15,
+      6.58
+    ],
+    "n_gaps": 68,
+    "operator_dev_std_m": 0.225,
+    "operator_dev_abs_p95_m": 0.436,
+    "operator_dev_abs_p99_m": 0.609,
+    "operator_dev_abs_max_m": 0.791,
+    "wide_gaps_in_spacings": {
+      "02_13B_Jackal": [
+        4.97,
+        4.91,
+        4.99,
+        4.98,
+        4.96,
+        4.96,
+        3.95
+      ]
+    }
+  },
+  "13D": {
+    "lane_spacing_m": 6.4,
+    "lane_spacing_iqr_m": [
+      6.29,
+      6.42
+    ],
+    "n_gaps": 12,
+    "operator_dev_std_m": 0.203,
+    "operator_dev_abs_p95_m": 0.392,
+    "operator_dev_abs_p99_m": 0.633,
+    "operator_dev_abs_max_m": 1.238,
+    "wide_gaps_in_spacings": {}
+  }
+}
