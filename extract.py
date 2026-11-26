@@ -37,9 +37,13 @@ def main():
             fz.log(f"{name}: raw folder not found, skipped")
             continue
         flags = []
-        t_o, v_o, w_o = fz.load_odom(drive_dir, flags)
-        t_i, gyro, acc, src = fz.load_imu(drive_dir, cfg.get("imu_preference", ["microstrain", "zed"]), flags)
-        t_g, x_g, y_g, gt_src = fz.load_gt(gt_dir, flags, local=False)
+        try:
+            t_o, v_o, w_o = fz.load_odom(drive_dir, flags)
+            t_i, gyro, acc, src = fz.load_imu(drive_dir, cfg.get("imu_preference", ["microstrain", "zed"]), flags)
+            t_g, x_g, y_g, gt_src = fz.load_gt(gt_dir, flags, local=False)
+        except FileNotFoundError as e:
+            fz.log(f"{name}: SKIPPED, missing input: {e}")
+            continue
         od = os.path.join(args.out, name)
         os.makedirs(od, exist_ok=True)
         pd.DataFrame({"t": t_o, "v_w": v_o, "w_w": w_o}).to_csv(
