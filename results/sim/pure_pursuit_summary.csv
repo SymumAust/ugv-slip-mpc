@@ -1,0 +1,6 @@
+drive,length_m,time_s,reached_end,row_rms_ey_m,row_max_ey_m,turn_max_ey_m,corridor_violation_pct
+01_13B_Jackal,1515,1509,True,0.008,0.07,0.066,0.0
+02_13B_Jackal,516,580,True,0.007,0.051,0.056,0.0
+03_13B_Jackal,1998,2027,True,0.006,0.053,0.055,0.0
+04_13D_Jackal,872,890,True,0.005,0.036,0.05,0.0
+05_13D_Jackal,831,779,True,0.005,0.073,0.093,0.0

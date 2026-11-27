@@ -1,0 +1,35 @@
+{
+  "per_drive": {
+    "02_13B_Jackal": {
+      "a": 0.8853872149353023,
+      "b": 0.9886431314393564
+    },
+    "04_13D_Jackal": {
+      "a": 0.8842781836828449,
+      "b": 0.9716645213493097
+    },
+    "05_13D_Jackal": {
+      "a": 0.8875557520711246,
+      "b": 0.9663460117338907
+    }
+  },
+  "per_fold": {
+    "test_02_13B_Jackal": {
+      "a": 0.8858872252350373,
+      "b": 0.9688991645528876
+    },
+    "test_04_13D_Jackal": {
+      "a": 0.8865121219287626,
+      "b": 0.9753104997454393
+    },
+    "test_05_13D_Jackal": {
+      "a": 0.8848018729904985,
+      "b": 0.9788190013740188
+    }
+  },
+  "all": {
+    "a": 0.8857307571900511,
+    "b": 0.9740136309640892
+  },
+  "note": "per_drive: plant of that drive when it is the test drive; per_fold[test_X]: controller model fitted on the training drives of the fold that tests X."
+}

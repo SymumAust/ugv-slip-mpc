@@ -1,0 +1,8 @@
+{
+  "v_c_min": 0.0,
+  "v_c_max": 1.8,
+  "w_c_max": 1.0,
+  "acc_max": 1.7,
+  "alpha_max": 1.0,
+  "basis": "Commanded (wheel-odometry) limits from drives 02, 04, 05, moving samples: speed 99.9th percentile 1.77-1.80 m/s (true speed = a x 1.8 = 1.6 m/s with a = 0.885), turn rate 99.9th percentile 0.96-1.07 rad/s, longitudinal acceleration 99th percentile 1.63-1.71 m/s^2, angular acceleration 99th percentile 0.93-1.02 rad/s^2. The robot never reversed, so v_c >= 0."
+}
