@@ -1,0 +1,19 @@
+controller,drive,completed,aborted,progress_pct,time_s,row_rms_ey,row_max_ey,turn_rms_ey,turn_max_ey,corridor_violation_pct,rate_violation_pct,infer_ms_median,infer_ms_p99,fold,role,filter_steps,filter_active_pct,filter_modified_pct,recovery_steps,slack_steps,max_slack_m,qp_failures,mean_dev_v,mean_dev_w,filter_ms_median,filter_ms_p99
+network,02_13B_Jackal,True,False,100.0,366.3,0.0104,0.076,0.0262,0.111,0.0,0.055,0.0148,0.0353,test_02_13B_Jackal,test drive,,,,,,,,,,,
+network+filter,02_13B_Jackal,True,False,100.0,366.4,0.0102,0.07,0.0262,0.11,0.0,0.0,1.0512,3.2633,test_02_13B_Jackal,test drive,3665.0,0.08,0.08,0.0,0.0,0.0,0.0,0.0284,0.0,1.019,3.218
+network,01_13B_Jackal,True,False,100.0,1077.8,0.0194,0.348,0.0445,0.187,0.0,0.492,0.0157,0.0338,test_02_13B_Jackal,extra path,,,,,,,,,,,
+network+filter,01_13B_Jackal,True,False,100.0,1079.1,0.0352,0.631,0.0461,0.2,0.0,0.0,1.0122,7.3695,test_02_13B_Jackal,extra path,10792.0,1.48,0.82,0.0,0.0,0.0,0.0,0.0005,0.025,0.983,7.321
+network,03_13B_Jackal,True,False,100.0,1419.3,0.0124,0.204,0.0328,0.106,0.0,0.042,0.0156,0.0415,test_02_13B_Jackal,extra path,,,,,,,,,,,
+network+filter,03_13B_Jackal,True,False,100.0,1419.4,0.0126,0.203,0.0328,0.106,0.0,0.0,1.0092,3.1703,test_02_13B_Jackal,extra path,14195.0,0.18,0.09,0.0,0.0,0.0,0.0,0.0029,0.0231,0.978,3.137
+network,04_13D_Jackal,True,False,100.0,616.5,0.0104,0.09,0.0314,0.126,0.0,0.065,0.0149,0.0292,test_04_13D_Jackal,test drive,,,,,,,,,,,
+network+filter,04_13D_Jackal,True,False,100.0,616.6,0.0105,0.091,0.0315,0.131,0.0,0.0,0.9763,3.0522,test_04_13D_Jackal,test drive,6167.0,0.11,0.1,0.0,0.0,0.0,0.0,0.0082,0.0068,0.949,3.012
+network,01_13B_Jackal,True,False,100.0,1073.9,0.0189,0.323,0.0464,0.192,0.0,0.419,0.0153,0.0307,test_04_13D_Jackal,extra path,,,,,,,,,,,
+network+filter,01_13B_Jackal,True,False,100.0,1074.5,0.0217,0.379,0.0483,0.199,0.0,0.009,1.01,6.8209,test_04_13D_Jackal,extra path,10746.0,1.2,0.69,0.0,0.0,0.0,0.0,0.0004,0.0236,0.98,6.781
+network,03_13B_Jackal,True,False,100.0,1413.1,0.012,0.17,0.0338,0.108,0.0,0.042,0.0159,0.0375,test_04_13D_Jackal,extra path,,,,,,,,,,,
+network+filter,03_13B_Jackal,True,False,100.0,1413.2,0.0124,0.17,0.0338,0.108,0.0,0.0,1.0254,3.2754,test_04_13D_Jackal,extra path,14133.0,0.15,0.09,0.0,0.0,0.0,0.0,0.0021,0.038,0.994,3.233
+network,05_13D_Jackal,True,False,100.0,587.8,0.0131,0.215,0.0758,0.449,0.0,0.578,0.0152,0.0326,test_05_13D_Jackal,test drive,,,,,,,,,,,
+network+filter,05_13D_Jackal,True,False,100.0,588.3,0.0258,0.412,0.0907,0.608,0.0,0.017,1.0172,17.5403,test_05_13D_Jackal,test drive,5884.0,1.78,1.21,0.0,0.0,0.0,0.0,0.0104,0.0584,0.986,17.5
+network,01_13B_Jackal,True,False,100.0,1074.6,0.0204,0.384,0.0459,0.172,0.0,0.344,0.0157,0.0379,test_05_13D_Jackal,extra path,,,,,,,,,,,
+network+filter,01_13B_Jackal,True,False,100.0,1076.2,0.0508,1.017,0.0536,0.503,0.046,0.019,1.0465,6.965,test_05_13D_Jackal,extra path,10763.0,1.11,0.76,5.0,11.0,0.0207,0.0,0.0604,0.0779,1.012,6.913
+network,03_13B_Jackal,True,False,100.0,1415.2,0.0131,0.222,0.0334,0.112,0.0,0.064,0.0159,0.0376,test_05_13D_Jackal,extra path,,,,,,,,,,,
+network+filter,03_13B_Jackal,True,False,100.0,1415.2,0.0132,0.221,0.0334,0.112,0.0,0.0,1.0018,3.1147,test_05_13D_Jackal,extra path,14153.0,0.2,0.11,0.0,0.0,0.0,0.0,0.001,0.0115,0.972,3.068
