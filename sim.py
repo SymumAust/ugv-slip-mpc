@@ -164,10 +164,11 @@ def pure_pursuit(P, X, info, lookahead=1.2, v_row=1.4, v_turn=0.8):
     return np.array([v, 2.0 * v * np.sin(alpha) / lookahead])
 
 
-def run(P, robot, controller, X0=None, t_max=None, stop_at_end=True, s_init=0.0):
+def run(P, robot, controller, X0=None, t_max=None, stop_at_end=True, s_init=0.0, abort_ey=None):
     """Closed loop: controller every DT_CTRL, robot integrated in between. Returns a log DataFrame.
     A run that starts partway along the path (X0 given) must pass that progress as s_init, because the
-    projection only searches near the previous progress (paths revisit lanes)."""
+    projection only searches near the previous progress (paths revisit lanes). abort_ey ends the run when
+    |e_y| exceeds it (a controller that has lost the path); the last row then has aborted=True."""
     X = P.start_state() if X0 is None else X0.copy()
     s_prev, rows = float(s_init), []
     t_max = t_max if t_max is not None else 3.0 * P.length / 0.5
@@ -178,6 +179,9 @@ def run(P, robot, controller, X0=None, t_max=None, stop_at_end=True, s_init=0.0)
         rows.append(dict(t=t, x=X[0], y=X[1], psi=X[2], v=X[3], w=X[4], v_c=U[0], w_c=U[1], s=info["s"],
                          e_y=info["e_y"], e_psi=info["e_psi"], d=info["d"], is_row=info["is_row"]))
         if stop_at_end and info["s"] >= P.length - 0.3:
+            break
+        if abort_ey is not None and abs(info["e_y"]) > abort_ey:
+            rows[-1]["aborted"] = True        # controller lost the path; the run ends here
             break
         X = robot.step(X, U)
         s_prev = info["s"]
