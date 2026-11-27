@@ -18,7 +18,9 @@ a state that is aligned with the path and turning with it can be held there. The
 up to SQP_ITERS times around its own latest solution.
 
 The model is the MPC's path-frame model (the fold's a, b and tau), so the filter knows no more than
-the MPC. Safety check = u_NN held for N steps. If that is unsafe, the QP is linearised around a backup trajectory
+the MPC. Safety check, cheapest first: (1) u_NN held for N steps is safe -> pass; (2) u_NN now, then the backup
+controller, is safe -> pass (a safe continuation exists, the filter's real criterion); (3) otherwise the
+QP. "active" = the QP ran, "modified" = the command really changed by more than 1e-3. The QP is linearised around a backup trajectory
 (u_NN for one step, then a simple steer-back-to-the-path law) and re-linearised around its own solution;
 (A_k, B_k) are exact Jacobians (CasADi). States
 are eliminated (condensed QP: 2N inputs + N slacks), solved with OSQP.
@@ -84,8 +86,8 @@ class SafetyFilter:
         self.FB = ca.Function("FB", [z, u, k], [ca.jacobian(zn, u)])
 
     def reset(self):
-        self.stats = dict(steps=0, active=0, slack_steps=0, max_slack=0.0, recovery=0, qp_fail=0,
-                          times=[], dev_v=[], dev_w=[])
+        self.stats = dict(steps=0, active=0, modified=0, backup_pass=0, slack_steps=0, max_slack=0.0,
+                          recovery=0, qp_fail=0, times=[], dev_v=[], dev_w=[])
 
     # --------------------------------------------------------------------------- one decision
     def _horizon(self, info, s_pred):
@@ -147,9 +149,20 @@ class SafetyFilter:
         z0 = np.array([info["s"], info["e_y"], info["e_psi"], X[3], X[4]])
         Ubar = np.tile(np.asarray(u_nn, float), (self.n, 1))
         Z, kap, d = self._rollout(z0, Ubar, info)
-        if self._safe(Z, Ubar, u_prev, d, kap):              # inactive: the network's command is safe
+        if self._safe(Z, Ubar, u_prev, d, kap):              # inactive: holding u_NN is already safe
             self.stats["times"].append(time.perf_counter() - t0)
             return np.asarray(u_nn, float)
+        # The real criterion (predictive safety filter): u_NN is safe if SOME safe continuation exists
+        # after it. Holding u_NN for 2 s is only a sufficient test (it fails near every turn, because the
+        # network will of course change its command later). Second, cheaper-than-QP test: u_NN now, then
+        # the backup controller. If that is safe, u_NN passes unchanged.
+        Ub = self._backup(z0, np.asarray(u_nn, float), u_prev, info)
+        if np.allclose(Ub[0], u_nn, atol=1e-9):
+            Zb, kapb, db = self._rollout(z0, Ub, info)
+            if self._safe(Zb, Ub, u_prev, db, kapb):
+                self.stats["backup_pass"] += 1
+                self.stats["times"].append(time.perf_counter() - t0)
+                return np.asarray(u_nn, float)
 
         outside = abs(z0[1]) > info["d"]
         self.stats["active"] += 1
@@ -182,6 +195,7 @@ class SafetyFilter:
                 self.stats["slack_steps"] += 1
                 self.stats["max_slack"] = max(self.stats["max_slack"], smax)
         u = np.clip(u, self.u_lo, self.u_hi)
+        self.stats["modified"] += int(np.max(np.abs(u - np.asarray(u_nn, float))) > 1e-3)
         self.stats["dev_v"].append(abs(u[0] - u_nn[0])); self.stats["dev_w"].append(abs(u[1] - u_nn[1]))
         self.stats["times"].append(time.perf_counter() - t0)
         return u
@@ -239,6 +253,7 @@ class SafetyFilter:
         t = np.array(self.stats["times"]) * 1e3
         s = self.stats
         return dict(filter_steps=s["steps"], filter_active_pct=round(100 * s["active"] / max(s["steps"], 1), 2),
+                    filter_modified_pct=round(100 * s["modified"] / max(s["steps"], 1), 2),
                     recovery_steps=s["recovery"], slack_steps=s["slack_steps"], max_slack_m=round(s["max_slack"], 4),
                     qp_failures=s["qp_fail"],
                     mean_dev_v=round(float(np.mean(s["dev_v"])), 4) if s["dev_v"] else 0.0,

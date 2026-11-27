@@ -71,6 +71,15 @@ def load_data(test, prefix="mpc"):
     return np.vstack(Fs), np.vstack(Us)
 
 
+def rate_violations(log):
+    """Share of steps where the applied command changed faster than the data-based rate limits
+    (|dv_c| > acc_max dt or |dw_c| > alpha_max dt): an input-constraint violation."""
+    L = sim.LIMITS
+    lim = np.array([L["acc_max"], L["alpha_max"]]) * sim.DT_CTRL
+    d = np.abs(np.diff(log[["v_c", "w_c"]].to_numpy(), axis=0))
+    return float(np.mean(np.any(d > lim + 1e-6, axis=1))) if len(d) else 0.0
+
+
 def evaluate(pol, drive, cal, label):
     P = sim.Path(drive)
     pol.reset()
@@ -86,6 +95,7 @@ def evaluate(pol, drive, cal, label):
                 turn_rms_ey=round(float(np.sqrt((t.e_y ** 2).mean())), 4) if len(t) else np.nan,
                 turn_max_ey=round(float(t.e_y.abs().max()), 3) if len(t) else np.nan,
                 corridor_violation_pct=round(100 * float((log.e_y.abs() > log.d).mean()), 3),
+                rate_violation_pct=round(100 * rate_violations(log), 3),
                 infer_ms_median=round(float(np.median(ms)), 4), infer_ms_p99=round(float(np.percentile(ms, 99)), 4)), log
 
 

@@ -125,14 +125,19 @@ def test_full(cal, out):
                 rows.append(res)
                 print(f"   {fold} {role:10s} {drive} {name:15s}: completed {res['completed']}, row max {res['row_max_ey']}, "
                       f"turn max {res['turn_max_ey']}, corridor {res['corridor_violation_pct']} %"
-                      + (f", filter active {res['filter_active_pct']} %, slack {res['slack_steps']}" if name != "network" else ""),
+                      + f", rate viol {res['rate_violation_pct']} %"
+                      + (f", filter QP {res['filter_active_pct']} %, modified {res['filter_modified_pct']} %, slack {res['slack_steps']}"
+                         if name != "network" else ""),
                       flush=True)
     df = pd.DataFrame(rows)
     df.to_csv(os.path.join(out, "summary.csv"), index=False)
     f = df[df.controller == "network+filter"]
-    check("4 full paths with the filter", bool(f.completed.all()) and float(f.corridor_violation_pct.max()) == 0.0,
+    n = df[df.controller == "network"]
+    check("4 full paths with the filter",
+          bool(f.completed.all()) and float(f.corridor_violation_pct.max()) == 0.0 and float(f.rate_violation_pct.max()) == 0.0,
           f"{int(f.completed.sum())}/{len(f)} completed, worst corridor violation {f.corridor_violation_pct.max()} %, "
-          f"filter active {f.filter_active_pct.min()}-{f.filter_active_pct.max()} % of steps, "
+          f"rate-limit violations network alone up to {n.rate_violation_pct.max()} % -> with filter {f.rate_violation_pct.max()} %, "
+          f"command modified in {f.filter_modified_pct.min()}-{f.filter_modified_pct.max()} % of steps, "
           f"total time per step median {f.infer_ms_median.median():.3f} ms (filter alone {f.filter_ms_median.median():.3f} ms)")
 
 
