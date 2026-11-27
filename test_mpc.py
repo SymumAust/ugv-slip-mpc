@@ -2,7 +2,7 @@
 """
 Step 3 checks for mpc.py.
     python test_mpc.py            # all five drives (about 10-15 min)
-    python test_mpc.py --quick    # drive 04 only
+    python test_mpc.py --quick    # drive 04 only (writes summary_quick.csv; summary.csv stays the full run)
 Writes results/mpc/summary.csv, results/mpc/sharpest_turn.png, results/mpc/speed_profile.png.
 
 Plants and models follow the evaluation folds: the simulated robot of drive X uses X's own a, b;
@@ -72,7 +72,7 @@ def test_turn(cal):
           f"stays inside the corridor in {sum(w[4] for w in worst)}/{len(worst)} drives")
 
 
-def test_full(cal, drives):
+def test_full(cal, drives, summary_name="summary.csv"):
     rows, logs = [], {}
     for d in drives:
         P = sim.Path(d)
@@ -95,7 +95,7 @@ def test_full(cal, drives):
             print(f"      {d} {name:12s} done: {row['time_s']} s, row max |e_y| {row['row_max_ey']}, turn max |e_y| {row['turn_max_ey']}")
     df = pd.DataFrame(rows)
     os.makedirs(OUT, exist_ok=True)
-    df.to_csv(os.path.join(OUT, "summary.csv"), index=False)
+    df.to_csv(os.path.join(OUT, summary_name), index=False)   # --quick never overwrites the full summary
     m = df[df.controller == "mpc"]
     check("3 MPC completes every path inside the corridor",
           bool(m.reached_end.all()) and float(m.corridor_violation_pct.max()) == 0.0,
@@ -162,6 +162,7 @@ if __name__ == "__main__":
     cal = sim.calibration_table()
     test_straight(cal)
     test_turn(cal)
-    logs = test_full(cal, ["04_13D_Jackal"] if args.quick else list(sim.ALL_DRIVES))
+    logs = test_full(cal, ["04_13D_Jackal"] if args.quick else list(sim.ALL_DRIVES),
+                     summary_name="summary_quick.csv" if args.quick else "summary.csv")
     figures(cal, logs)
     print(f"\n{sum(results)}/{len(results)} tests passed")
