@@ -1,0 +1,11 @@
+drive,controller,reached_end,time_s,mean_true_speed,row_rms_ey,row_max_ey,turn_rms_ey,turn_max_ey,corridor_violation_pct,solves,failures,slack_steps,solve_ms_median,solve_ms_p99,solve_ms_max
+01_13B_Jackal,mpc,True,1073.7,1.411,0.0152,0.146,0.0447,0.157,0.0,10738.0,0.0,0.0,9.53,18.05,90.82
+01_13B_Jackal,pure_pursuit,True,1508.9,1.004,0.0075,0.07,0.0247,0.066,0.0,,,,,,
+02_13B_Jackal,mpc,True,365.3,1.411,0.0108,0.075,0.0256,0.102,0.0,3654.0,0.0,0.0,9.37,18.91,83.85
+02_13B_Jackal,pure_pursuit,True,580.4,0.888,0.0068,0.051,0.0154,0.056,0.0,,,,,,
+03_13B_Jackal,mpc,True,1414.3,1.413,0.0117,0.139,0.0336,0.104,0.0,14144.0,0.0,0.0,9.35,15.64,88.79
+03_13B_Jackal,pure_pursuit,True,2027.3,0.986,0.0058,0.053,0.0197,0.055,0.0,,,,,,
+04_13D_Jackal,mpc,True,617.4,1.412,0.0107,0.092,0.0309,0.116,0.0,6175.0,0.0,0.0,9.33,16.07,89.13
+04_13D_Jackal,pure_pursuit,True,889.7,0.98,0.0046,0.036,0.0173,0.05,0.0,,,,,,
+05_13D_Jackal,mpc,True,587.7,1.414,0.0104,0.12,0.0538,0.159,0.0,5878.0,0.0,0.0,9.39,16.31,94.57
+05_13D_Jackal,pure_pursuit,True,778.9,1.067,0.0053,0.073,0.0255,0.093,0.0,,,,,,

@@ -100,16 +100,20 @@ class Path:
         return float(np.clip(self.s[i] + t, 0.0, self.length))
 
     def frame(self, X, s_prev):
-        """Path-frame quantities for state X: s, e_y (left of path positive), e_psi, kappa preview, d."""
+        """Path-frame quantities for state X: s, e_y (left of path positive), e_psi, curvature and corridor
+        preview at PREVIEW_DIST ahead, corridor half-width d. This is ALL a controller may know of the path."""
         x, y, psi = X[0], X[1], X[2]
         s = self.project(x, y, s_prev)
         xr, yr = self.interp(s, self.x), self.interp(s, self.y)
         pr = self.interp(s, np.unwrap(self.psi))
         e_y = -np.sin(pr) * (x - xr) + np.cos(pr) * (y - yr)
         e_psi = wrap(psi - pr)
-        kap = self.interp(np.minimum(s + PREVIEW_DIST, self.length), self.kappa)
+        ahead = np.minimum(s + PREVIEW_DIST, self.length)
+        kap = self.interp(ahead, self.kappa)
+        d_ahead = self.d[[self.index(v) for v in ahead]]
         return dict(s=s, e_y=float(e_y), e_psi=float(e_psi), kappa=self.interp(s, self.kappa),
-                    preview=kap, d=float(self.d[self.index(s)]), is_row=bool(self.is_row[self.index(s)]))
+                    preview=kap, d=float(self.d[self.index(s)]), d_preview=d_ahead,
+                    is_row=bool(self.is_row[self.index(s)]))
 
     def offset_pose(self, s, lateral):
         """Pose `lateral` metres to the left of the path at progress s, heading along the path (for tests)."""
@@ -160,10 +164,12 @@ def pure_pursuit(P, X, info, lookahead=1.2, v_row=1.4, v_turn=0.8):
     return np.array([v, 2.0 * v * np.sin(alpha) / lookahead])
 
 
-def run(P, robot, controller, X0=None, t_max=None, stop_at_end=True):
-    """Closed loop: controller every DT_CTRL, robot integrated in between. Returns a log DataFrame."""
+def run(P, robot, controller, X0=None, t_max=None, stop_at_end=True, s_init=0.0):
+    """Closed loop: controller every DT_CTRL, robot integrated in between. Returns a log DataFrame.
+    A run that starts partway along the path (X0 given) must pass that progress as s_init, because the
+    projection only searches near the previous progress (paths revisit lanes)."""
     X = P.start_state() if X0 is None else X0.copy()
-    s_prev, rows = 0.0, []
+    s_prev, rows = float(s_init), []
     t_max = t_max if t_max is not None else 3.0 * P.length / 0.5
     t = 0.0
     while t < t_max:
