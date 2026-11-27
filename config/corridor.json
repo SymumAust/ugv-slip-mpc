@@ -1,0 +1,6 @@
+{
+  "d_row_m": 1.0,
+  "d_turn_m": 2.0,
+  "lane_spacing_m": {"13B": 6.45, "13D": 6.40},
+  "basis": "d_row = 1.0 m: inside the largest lateral excursion the human operator made without collision (0.79 m in 13B, 1.24 m in 13D, robot centre) with a 0.2 m margin, and wider than the operator's 99th percentile (0.61-0.63 m). d_turn = 2 x d_row is an assumption: the headland has no trees but the field boundary is not in the data. Chosen 2026-11-27 (option B of three)."
+}
