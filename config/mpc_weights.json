@@ -1,0 +1,44 @@
+{
+  "per_fold": {
+    "test_02_13B_Jackal": {
+      "q_y": 80.0,
+      "q_psi": 1.0,
+      "r_dw": 8.0,
+      "qN_y": 160.0,
+      "qN_psi": 2.0
+    },
+    "test_04_13D_Jackal": {
+      "q_y": 80.0,
+      "q_psi": 1.0,
+      "r_dw": 8.0,
+      "qN_y": 160.0,
+      "qN_psi": 2.0
+    },
+    "test_05_13D_Jackal": {
+      "q_y": 80.0,
+      "q_psi": 1.0,
+      "r_dw": 2.0,
+      "qN_y": 160.0,
+      "qN_psi": 2.0
+    }
+  },
+  "rule": "min worst max|e_y| on the fold's training drives; time <= 1.03 x current; tie within 0.005 m -> min RMS",
+  "grid": {
+    "q_y": [
+      10.0,
+      20.0,
+      40.0,
+      80.0
+    ],
+    "q_psi": [
+      1.0,
+      3.0,
+      10.0
+    ],
+    "r_dw": [
+      2.0,
+      8.0,
+      32.0
+    ]
+  }
+}
